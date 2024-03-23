@@ -20,5 +20,12 @@ def hide_text(file_to_hide_in, text_to_hide):
     with open(file_to_hide_in, "ab") as fl:
         fl.write(encoded_text)
 
+def read_text(file_to_read_from):
+    bytes_end = bytes.fromhex("FFD9")
+    with open(file_to_read_from, "rb") as fl:
+        fl_content = fl.read()
+        fl_offset = fl_content.index(bytes_end)
+        fl.seek(fl_offset + 2)
+        print(fl.read())
 
-print(get_bytes_from_jpg("test.jpeg"))
+
