@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+import PIL.Image
+import io
+
 
 def get_bytes_from_jpg(file_to_get_bytes_from, fmt="hex"):
     file_bytes = []
@@ -28,4 +31,22 @@ def read_text(file_to_read_from):
         fl.seek(fl_offset + 2)
         print(fl.read())
 
+def hide_image(file_to_hide_in, file_to_hide):
+    image_file = PIL.Image.open(file_to_hide)
+    file_bytes = io.BytesIO()
+    image_file.save(file_bytes, format="PNG")
+
+    with open(file_to_hide_in, "ab") as fl:
+        fl.write(file_bytes.getvalue())
+
+def read_image(file_to_read_from, new_img_name):
+    bytes_end = bytes.fromhex("FFD9")
+    with open(file_to_read_from, "rb") as fl:
+        fl_content = fl.read()
+        fl_offset = fl_content.index(bytes_end)
+
+        fl.seek(fl_offset + 2)
+        f = fl.read()
+        img = PIL.Image.open(io.BytesIO(f))
+        img.save(new_img_name)
 
