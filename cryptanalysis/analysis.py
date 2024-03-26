@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import numpy as np
 
-def get_frequencies(text_file=False, text=False):
+def get_frequencies(text_file=False, text=False, mode="text"):
     if text_file != False and text == False:
         with open(text_file, "r") as fl:
             sign_count = {}
@@ -18,7 +18,6 @@ def get_frequencies(text_file=False, text=False):
                     sign_count[sign] = 0
                     sign_count[sign] += 1
 
-
     elif text != False and text_file == False:
         sign_count = {}
         for sign in text:
@@ -28,8 +27,17 @@ def get_frequencies(text_file=False, text=False):
                 sign_count[sign] = 0
                 sign_count[sign] += 1
 
-    for i in sign_count:
-        print(f"{i} : {sign_count[i]}")
+    if mode == "text":
+        for i in sign_count:
+            print(f"{i} : {sign_count[i]}")
+
+    elif mode == "visual":
+        fig, ax = plt.subplots(figsize=(30, 20), layout="constrained")
+        sign_names = list(sign_count.keys())
+        sign_frequencies = list(sign_count.values())
+        ax.bar(sign_names, sign_frequencies)
+        fig.suptitle("Character frequencies visualized")
+        plt.show
 
 def language_frequencies(language, which_frequency, mode="text"):
     if mode == "text":
@@ -184,9 +192,11 @@ def language_frequencies(language, which_frequency, mode="text"):
                 sign_names = list(ff.most_common_numbers.keys())
                 sign_frequencies = list(ff.most_common_numbers.values())
 
-        #elif language == "french":
 
         ax.bar(sign_names, sign_frequencies)
         fig.suptitle("Frequencies visualized")
 
         plt.show()
+
+
+
