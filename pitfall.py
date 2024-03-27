@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-
-from steganalysis import jpg_steg, png_steg
+import steganalysis.jpg_steg
+import steganalysis.png_steg
+import cryptanalysis.analysis
 import argparse
 
 
