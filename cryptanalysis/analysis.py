@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-import english_frequencies as ef
-import german_frequencies as gf
-import french_frequencies as ff
+import cryptanalysis.french as ff
+import cryptanalysis.german as gf
+import cryptanalysis.english as ef
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 import numpy as np
@@ -194,7 +194,7 @@ def language_frequencies(language, which_frequency, mode="text"):
 
 
         ax.bar(sign_names, sign_frequencies)
-        fig.suptitle("Frequencies visualized")
+        fig.suptitle("Character frequencies visualized")
 
         plt.show()
 

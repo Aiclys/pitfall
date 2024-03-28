@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-#!/usr/bin/env python3
 import PIL.Image
 import io
 import os
@@ -137,4 +136,4 @@ def lsb_decode(img_src, password):
     if password in msg:
         print(msg[:msg.index(password)])
     else:
-        print("Can't find hidden message")
+        print("Can't find hidden message, wrong password")
